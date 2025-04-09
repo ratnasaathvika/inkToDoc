@@ -100,4 +100,5 @@ def download_file():
     return jsonify({"error": "File not found"}), 404
 
 if __name__ == "__main__":
+    print('Hello')
     app.run(debug=True)
