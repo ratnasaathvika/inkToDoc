@@ -1,3 +1,5 @@
+# app.py
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from model import predict_text
@@ -18,13 +20,11 @@ def upload_image():
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
         extracted_text = predict_text(image)
+
         return jsonify({'extracted_text': extracted_text})
     
     except Exception as e:
-        import traceback
-        traceback.print_exc()  # Print full error in terminal
         return jsonify({'error': str(e)}), 500
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
