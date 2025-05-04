@@ -3,8 +3,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from model import predict_text
-from PIL import Image
-import io
+import cv2
+import numpy as np
 
 app = Flask(__name__)
 CORS(app)
@@ -16,8 +16,12 @@ def upload_image():
             return jsonify({'error': 'No image uploaded'}), 400
 
         file = request.files['image']
+        # Read image file as bytes
         image_bytes = file.read()
-        image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+        # Convert bytes to numpy array
+        nparr = np.frombuffer(image_bytes, np.uint8)
+        # Decode image
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         extracted_text = predict_text(image)
 
