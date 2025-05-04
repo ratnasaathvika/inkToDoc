@@ -14,20 +14,14 @@ import {
   Tooltip,
   Snackbar,
   Alert,
-  IconButton,
-  Divider,
-  List,
-  ListItem,
-  ListItemText
+  Divider
 } from '@mui/material';
 import { 
   FileDownload as FileDownloadIcon, 
   ContentCopy as ContentCopyIcon, 
   Check as CheckIcon,
-  Save as SaveIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
-  FormatSize as FormatSizeIcon,
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
   FormatUnderlined as FormatUnderlinedIcon
