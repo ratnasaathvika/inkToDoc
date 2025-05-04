@@ -48,7 +48,7 @@ const UserProfileMenu = () => {
               }
             }}
           >
-            {user?.name?.charAt(0) || <AccountCircleIcon />}
+            {user?.username?.charAt(0) || <AccountCircleIcon />}
           </Avatar>
         </IconButton>
       </motion.div>
@@ -78,7 +78,7 @@ const UserProfileMenu = () => {
       >
         <MenuItem onClick={handleClose}>
           <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-            {user?.name}
+            {user?.username}
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>

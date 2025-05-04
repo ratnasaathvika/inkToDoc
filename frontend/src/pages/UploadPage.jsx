@@ -1,13 +1,17 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, Zoom } from '@mui/material';
+import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, Zoom, CircularProgress } from '@mui/material';
 import { CloudUpload as CloudUploadIcon, Image as ImageIcon } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { useUser } from '../context/UserContext';
+import { useProcessing } from '../context/ProcessingContext';
 
-const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
+const UploadPage = () => {
   const fileInputRef = useRef();
   const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+  const { setProcessing, setExtractedText, processing } = useProcessing();
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
@@ -167,22 +171,43 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
+                  style={{ display: 'flex', gap: '1rem' }}
                 >
                   <Button
                     variant="contained"
                     color="primary"
                     size="large"
-                    startIcon={<CloudUploadIcon />}
+                    startIcon={processing ? <CircularProgress size={24} color="inherit" /> : <CloudUploadIcon />}
                     onClick={handleExtract}
+                    disabled={processing}
                     sx={{
                       background: 'linear-gradient(135deg, #1a237e 0%, #0d47a1 100%)',
                       boxShadow: '0 3px 5px 2px rgba(26, 35, 126, .2)',
                       '&:hover': {
                         background: 'linear-gradient(135deg, #0d47a1 0%, #1a237e 100%)',
+                      },
+                      minWidth: '150px'
+                    }}
+                  >
+                    {processing ? 'Extracting...' : 'Extract Text'}
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="large"
+                    startIcon={<ImageIcon />}
+                    onClick={handleSelectImage}
+                    disabled={processing}
+                    sx={{
+                      borderColor: '#1a237e',
+                      color: '#1a237e',
+                      '&:hover': {
+                        borderColor: '#0d47a1',
+                        backgroundColor: 'rgba(26, 35, 126, 0.04)'
                       }
                     }}
                   >
-                    Extract Text
+                    Change Image
                   </Button>
                 </motion.div>
               </Box>

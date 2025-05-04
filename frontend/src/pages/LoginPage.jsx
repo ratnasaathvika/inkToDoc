@@ -19,13 +19,23 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password
       });
 
+      // Store the token
       localStorage.setItem('token', response.data.token);
-      login(response.data);
+      
+      // Fetch user profile
+      const userResponse = await axios.get('http://localhost:5000/api/user/profile', {
+        headers: {
+          'x-auth-token': response.data.token
+        }
+      });
+      
+      // Store user data and update context
+      login(userResponse.data);
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);

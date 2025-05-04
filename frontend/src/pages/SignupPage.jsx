@@ -34,19 +34,24 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', {
-        name,
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
+        username: name,
         email,
         password
       });
 
-      // Store the token in localStorage
+      // Store the token
       localStorage.setItem('token', response.data.token);
       
-      // Update user context with the response data
-      login(response.data);
+      // Fetch user profile
+      const userResponse = await axios.get('http://localhost:5000/api/user/profile', {
+        headers: {
+          'x-auth-token': response.data.token
+        }
+      });
       
-      // Navigate to home page
+      // Store user data and update context
+      login(userResponse.data);
       navigate('/');
     } catch (error) {
       console.error('Signup error:', error);
