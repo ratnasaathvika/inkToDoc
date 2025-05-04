@@ -76,7 +76,7 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
         alignItems: 'center',
         background: 'linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%)',
         p: 3,
-        overflow: 'hidden'
+        overflow: 'auto'
       }}
     >
       <motion.div
@@ -122,7 +122,8 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: 3,
-            overflow: 'hidden'
+            overflow: 'auto',
+            maxHeight: '90vh'
           }}
         >
           <motion.div
@@ -134,7 +135,7 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              overflow: 'hidden'
+              overflow: 'auto'
             }}
           >
             {preview ? (
@@ -145,7 +146,7 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: 2,
-                  overflow: 'hidden'
+                  overflow: 'auto'
                 }}
               >
                 <motion.img 
@@ -153,7 +154,7 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
                   alt="Preview" 
                   style={{ 
                     maxWidth: '100%', 
-                    maxHeight: '300px',
+                    maxHeight: '60vh',
                     borderRadius: '8px',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
                     objectFit: 'contain'
@@ -193,7 +194,8 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
                 style={{
                   width: '100%',
                   maxWidth: '500px',
-                  height: '300px',
+                  minHeight: '300px',
+                  maxHeight: '60vh',
                   border: '2px dashed #aaa',
                   borderRadius: '12px',
                   padding: '1.5rem',
@@ -206,7 +208,7 @@ const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
                   transition: 'all 0.3s ease',
                   backgroundColor: 'rgba(255, 255, 255, 0.8)',
                   backdropFilter: 'blur(5px)',
-                  overflow: 'hidden',
+                  overflow: 'auto',
                   '&:hover': {
                     borderColor: '#1a237e',
                     backgroundColor: 'rgba(26, 35, 126, 0.04)'

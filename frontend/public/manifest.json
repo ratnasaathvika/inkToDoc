@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Ink to Doc",
+  "name": "Ink to Doc - Convert your handwritten notes to digital text",
   "icons": [
     {
       "src": "favicon.ico",
