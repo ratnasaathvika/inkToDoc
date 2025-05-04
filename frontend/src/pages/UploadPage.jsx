@@ -4,10 +4,14 @@ import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActi
 import { CloudUpload as CloudUploadIcon, Image as ImageIcon } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { useUser } from '../context/UserContext';
+import { useProcessing } from '../context/ProcessingContext';
 
-const UploadPage = ({ setProcessing, setExtractedText, isAuthenticated }) => {
+const UploadPage = () => {
   const fileInputRef = useRef();
   const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+  const { setProcessing, setExtractedText } = useProcessing();
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);

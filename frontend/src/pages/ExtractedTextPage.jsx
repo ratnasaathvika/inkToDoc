@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Box, 
   Typography, 
@@ -24,12 +25,16 @@ import {
   VisibilityOff as VisibilityOffIcon,
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
-  FormatUnderlined as FormatUnderlinedIcon
+  FormatUnderlined as FormatUnderlinedIcon,
+  ArrowBack as ArrowBackIcon
 } from '@mui/icons-material';
 import { jsPDF } from 'jspdf';
 import { motion } from 'framer-motion';
+import { useProcessing } from '../context/ProcessingContext';
 
-const ExtractedTextPage = ({ extractedText, setExtractedText }) => {
+const ExtractedTextPage = () => {
+  const navigate = useNavigate();
+  const { extractedText, setExtractedText } = useProcessing();
   const [copied, setCopied] = useState(false);
   const [exportFormat, setExportFormat] = useState('docx');
   const [displayMode, setDisplayMode] = useState('edit');
