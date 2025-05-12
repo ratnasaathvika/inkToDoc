@@ -252,7 +252,7 @@ const UploadPage = () => {
                   }}
                 >
                   {isAuthenticated() 
-                    ? "Drag and drop your image here or click to browse"
+                    ? "Click here to browse and upload the image"
                     : "Please login to upload and process images"}
                 </Typography>
                 <Button
