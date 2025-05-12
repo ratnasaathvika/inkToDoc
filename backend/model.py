@@ -4,6 +4,7 @@ import torch
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 import numpy as np
 import cv2
+import re
 
 # Load processor and model
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
@@ -101,17 +102,20 @@ def predict_text(image):
                 generated_ids = model.generate(pixel_values)
                 prediction = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
                 
-                if prediction.strip():
+                # Only skip if line is >99% blank AND prediction is only numbers/gibberish
+                if is_mostly_blank(line_img, threshold=0.99) and is_only_numbers_or_gibberish(prediction):
+                    results.append("")
+                elif prediction.strip():
                     results.append(prediction.strip())
                 else:
-                    results.append("[No text detected]")
+                    results.append("")
                     
             except Exception as e:
                 print(f"Error processing line: {str(e)}")
-                results.append("[Error: Could not recognize line]")
+                results.append("")
         
-        return "\n".join(results) if results else "[No text detected]"
+        return "\n".join(results) if results else ""
         
     except Exception as e:
         print(f"Error in predict_text: {str(e)}")
-        return "[Error: Could not process image]"
+        return ""

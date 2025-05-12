@@ -286,6 +286,7 @@ const ExtractedTextPage = () => {
                       setAutoSaveStatus('saving...');
                     }}
                     variant="outlined"
+                    spellCheck={false}
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         fontSize: getFontSize(fontSize),
